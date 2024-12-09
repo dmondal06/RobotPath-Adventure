@@ -10,11 +10,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         // Initialize the AppDatabase
-        val appDatabase = DatabaseProvider.getDatabase(applicationContext)
+     //   val appDatabase = DatabaseProvider.getDatabase(applicationContext)
 
         setContent {
             // Set up the AppNavigator and pass the database
-            AppNavigator(appDatabase = appDatabase)
+            AppNavigator()
         }
     }
 }

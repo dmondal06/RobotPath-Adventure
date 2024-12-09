@@ -1,53 +1,52 @@
 package com.example.robotpath_adventure
 
-
-
 import androidx.compose.runtime.Composable
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.robotpath_adventure.ViewModels.LoginViewModel
-import com.example.robotpath_adventure.data.AppDatabase
-import com.example.robotpath_adventure.data.UserRepository
 import com.example.robotpath_adventure.ui.LoginScreen
-import com.example.robotpath_adventure.ui.screens.RegistrationScreen
-import com.example.robotpath_adventure.ui.screens.SplashScreen
+import com.example.robotpath_adventure.ui.screens.*
 
 @Composable
-fun AppNavigator(appDatabase: AppDatabase) {
+fun AppNavigator() {
     val navController: NavHostController = rememberNavController()
-    val userRepository = UserRepository(appDatabase.userDao())
-    val loginViewModel: LoginViewModel = viewModel(factory = LoginViewModel.provideFactory(userRepository))
 
     NavHost(navController = navController, startDestination = "splash") {
         // Splash Screen
         composable("splash") {
-            SplashScreen(navController)
+            SplashScreen(navController = navController)
         }
 
-        // Login Page
+        // Login Screen
         composable("login") {
-            LoginScreen(navController = navController,viewModel = loginViewModel)
+            LoginScreen(navController = navController)
         }
 
-        // Registration Page
+        // Registration Screen
         composable("registration") {
-            RegistrationScreen(navController)
+            RegistrationScreen(navController = navController)
         }
 
-        // Dashboard
+        // Parent Dashboard Screen
+        composable("parent_dashboard") {
+            ParentDashboardScreen(navController = navController)
+        }
+
+        // Kid Dashboard Screen
+        composable("kid_dashboard") {
+            KidDashboardScreen(navController = navController)
+        }
+
+        // Game Screen
+        composable("number_puzzle_game") {
+            NumberPuzzleGameScreen(navController = navController)
+        }
+
+        // Dashboard Screen (Placeholder for any shared dashboard logic)
         composable("dashboard") {
-            DashboardScreen(navController)
+            DashboardScreen(navController = navController)
         }
 
     }
-}
-
-
-
-@Composable
-fun DashboardScreen(navController: NavHostController) {
-
 }

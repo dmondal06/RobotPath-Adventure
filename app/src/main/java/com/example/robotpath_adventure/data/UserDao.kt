@@ -1,23 +1,29 @@
-package com.example.robotpath_adventure.data
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 
-
-
 @Dao
 interface UserDao {
-    @Insert
+
+    // Insert or replace a user in the database
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUser(user: User)
 
-    @Query("SELECT * FROM users WHERE role = :role")
-    fun getUsersByRole(role: String): Flow<List<User>>
+    // Retrieve a user by email and password for parent login
+    @Query("SELECT * FROM users WHERE email = :email AND password = :password AND role = 'parent' LIMIT 1")
+    suspend fun loginParent(email: String, password: String): User?
 
-    @Query("SELECT * FROM users WHERE id = :parentId")
-    suspend fun getKidsForParent(parentId: Int): List<User>
+    // Retrieve a user by kid ID and password for kid login
+    @Query("SELECT * FROM users WHERE kidID = :kidID AND password = :password AND role = 'kid' LIMIT 1")
+    suspend fun loginKid(kidID: String, password: String): User?
 
-    @Query("SELECT * FROM users WHERE email = :email AND password = :password LIMIT 1")
-    suspend fun getUserByEmailAndPassword(email: String, password: String): User?
+    // Retrieve all kids linked to a specific parent email
+    @Query("SELECT * FROM users WHERE email = :email AND role = 'kid'")
+    fun getKidsForParent(email: String): Flow<List<User>>
 
+    // Retrieve a user by email for any purpose
+    @Query("SELECT * FROM users WHERE email = :email")
+    suspend fun getUserByEmail(email: String): User?
 }

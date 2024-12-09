@@ -1,34 +1,41 @@
-/*
- * Copyright (C) 2023 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.example.robotpath_adventure.data
 
 
-import com.example.robotpath_adventure.data.UserDao
-import com.example.robotpath_adventure.data.User
 
-class UserRepository(private val userDao: UserDao) {
 
-    // Authenticate user for login
-    suspend fun authenticateUser(email: String, password: String): User? {
-        return userDao.getUserByEmailAndPassword(email, password)
-    }
 
-    // Register a new user
-    suspend fun addUser(user: User) {
-        userDao.insertUser(user)
-    }
-}
+
+
+
+//import User
+//import UserDao
+//
+//
+//
+//import kotlinx.coroutines.flow.Flow
+//
+//class UserRepository(private val userDao: UserDao) {
+//
+//    // Insert a new user (Parent or Kid)
+//    suspend fun addUser(user: User) {
+//        userDao.insertUser(user)
+//    }
+//
+//    // Login for parents using email and password
+//    suspend fun loginParent(email: String, password: String): User? {
+//        return userDao.loginParent(email, password)
+//    }
+//
+//    // Login for kids using Kid ID and password
+//    suspend fun loginKid(kidID: String, password: String): User? {
+//        return userDao.loginKid(kidID, password)
+//    }
+//
+//    // Get all kids linked to a parent (via  parent email)
+//    fun getKidsForParent(email: String): Flow<List<User>> {
+//        return userDao.getKidsForParent(email)
+//    }
+//}
+
+
+//
